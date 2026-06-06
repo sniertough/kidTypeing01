@@ -1,6 +1,7 @@
 import { buildLetterBucket } from "../src/letterBuckets";
 import { CORE_WORDS, WORDS } from "../src/words";
 import { buildExpandedWords } from "../src/expandedWords";
+import { buildAnimalWords } from "../src/animalWords";
 
 const letters = "abcdefghijklmnopqrstuvwxyz".split("");
 const bucketCounts = Object.fromEntries(
@@ -11,6 +12,7 @@ const tooSmall = Object.entries(bucketCounts).filter(([, count]) => count < 5);
 
 const report = {
   core: CORE_WORDS.length,
+  animalRaw: buildAnimalWords().length,
   expandedRaw: buildExpandedWords().length,
   mergedDeduped: WORDS.length,
   bucketCounts,

@@ -1,3 +1,4 @@
+import { buildAnimalWords } from "./animalWords";
 import { buildExpandedWords } from "./expandedWords";
 import { buildSupplementalWords } from "./supplementalWords";
 
@@ -165,7 +166,7 @@ const coreWordsWithPriority: KidWord[] = CORE_WORDS.map(item => ({
   priority: 0.16
 }));
 
-for (const item of [...coreWordsWithPriority, ...buildExpandedWords(), ...buildSupplementalWords()]) {
+for (const item of [...coreWordsWithPriority, ...buildAnimalWords(), ...buildExpandedWords(), ...buildSupplementalWords()]) {
   const key = cleanWord(item.word);
   if (!byCleanWord.has(key)) byCleanWord.set(key, item);
 }
