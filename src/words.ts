@@ -156,7 +156,8 @@ const byCleanWord = new Map<string, KidWord>();
 const cleanWord = (value: string) => value.toLowerCase().replace(/[^a-z]/g, "");
 
 for (const item of [...CORE_WORDS, ...buildExpandedWords()]) {
-  byCleanWord.set(cleanWord(item.word), item);
+  const key = cleanWord(item.word);
+  if (!byCleanWord.has(key)) byCleanWord.set(key, item);
 }
 
 export const WORDS: KidWord[] = [...byCleanWord.values()];
