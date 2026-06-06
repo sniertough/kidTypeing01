@@ -77,6 +77,7 @@ const rawWords: RawWord[] = [
   ["noodle", "บะหมี่", "🍜", "food"],
   ["bread", "ขนมปัง", "🍞", "food"],
   ["egg", "ไข่", "🥚", "food"],
+  ["ice", "น้ำแข็ง", "🧊", "food"],
   ["milk", "นม", "🥛", "food"],
   ["water", "น้ำ", "💧", "food"],
   ["juice", "น้ำผลไม้", "🧃", "food"],
@@ -84,6 +85,8 @@ const rawWords: RawWord[] = [
   ["cake", "เค้ก", "🍰", "food"],
   ["cookie", "คุกกี้", "🍪", "food"],
   ["cracker", "แครกเกอร์", "🍪", "food"],
+  ["jam", "แยม", "🍓", "food"],
+  ["jelly", "เยลลี", "🍮", "food"],
   ["cereal", "ซีเรียล", "🥣", "food"],
   ["cheese", "ชีส", "🧀", "food"],
   ["yogurt", "โยเกิร์ต", "🥣", "food"],
@@ -92,6 +95,7 @@ const rawWords: RawWord[] = [
   ["fork", "ส้อม", "🍴", "home"],
   ["cup", "แก้ว", "🥤", "home"],
   ["bottle", "ขวด", "🍼", "home"],
+  ["jar", "ขวดโหล", "🫙", "home"],
   ["bowl", "ชาม", "🥣", "home"],
   ["plate", "จาน", "🍽️", "home"],
   ["chair", "เก้าอี้", "🪑", "home"],
@@ -130,6 +134,8 @@ const rawWords: RawWord[] = [
   ["robot", "หุ่นยนต์", "🤖", "toy"],
   ["drum", "กลอง", "🥁", "toy"],
   ["bell", "กระดิ่ง", "🔔", "toy"],
+  ["xylophone", "ไซโลโฟน", "🎼", "toy"],
+  ["violin", "ไวโอลิน", "🎻", "toy"],
   ["book", "หนังสือ", "📚", "school"],
   ["paper", "กระดาษ", "📄", "school"],
   ["pencil", "ดินสอ", "✏️", "school"],
@@ -140,6 +146,7 @@ const rawWords: RawWord[] = [
   ["ruler", "ไม้บรรทัด", "📏", "school"],
   ["scissors", "กรรไกร", "✂️", "school"],
   ["glue", "กาว", "🧴", "school"],
+  ["question", "คำถาม", "❓", "school"],
   ["bag", "กระเป๋า", "🎒", "school"],
   ["lunchbox", "กล่องข้าว", "🍱", "school"],
   ["school", "โรงเรียน", "🏫", "school"],
@@ -155,9 +162,11 @@ const rawWords: RawWord[] = [
   ["bathroom", "ห้องน้ำ", "🚽", "place"],
   ["bedroom", "ห้องนอน", "🛏️", "place"],
   ["garden", "สวน", "🌷", "place"],
+  ["yard", "สนามหน้าบ้าน", "🏡", "place"],
   ["shop", "ร้านค้า", "🏪", "place"],
   ["market", "ตลาด", "🛒", "place"],
   ["hospital", "โรงพยาบาล", "🏥", "place"],
+  ["zoo", "สวนสัตว์", "🦁", "place"],
   ["road", "ถนน", "🛣️", "place"],
   ["car", "รถ", "🚗", "vehicle"],
   ["bus", "รถบัส", "🚌", "vehicle"],
@@ -169,6 +178,7 @@ const rawWords: RawWord[] = [
   ["taxi", "แท็กซี่", "🚕", "vehicle"],
   ["ambulance", "รถพยาบาล", "🚑", "vehicle"],
   ["fire truck", "รถดับเพลิง", "🚒", "vehicle"],
+  ["van", "รถตู้", "🚐", "vehicle"],
   ["cat", "แมว", "🐱", "animal"],
   ["dog", "หมา", "🐶", "animal"],
   ["fish", "ปลา", "🐟", "animal"],
@@ -183,6 +193,9 @@ const rawWords: RawWord[] = [
   ["horse", "ม้า", "🐴", "animal"],
   ["rabbit", "กระต่าย", "🐰", "animal"],
   ["mouse", "หนู", "🐭", "animal"],
+  ["fox", "สุนัขจิ้งจอก", "🦊", "animal"],
+  ["owl", "นกฮูก", "🦉", "animal"],
+  ["octopus", "หมึกยักษ์", "🐙", "animal"],
   ["frog", "กบ", "🐸", "animal"],
   ["ant", "มด", "🐜", "animal"],
   ["bee", "ผึ้ง", "🐝", "animal"],
@@ -213,6 +226,7 @@ const rawWords: RawWord[] = [
   ["rock", "ก้อนหิน", "🪨", "nature"],
   ["sand", "ทราย", "🏖️", "nature"],
   ["sea", "ทะเล", "🌊", "nature"],
+  ["ocean", "มหาสมุทร", "🌊", "nature"],
   ["beach", "ชายหาด", "🏖️", "nature"],
   ["run", "วิ่ง", "🏃", "action"],
   ["walk", "เดิน", "🚶", "action"],
@@ -255,6 +269,7 @@ const rawWords: RawWord[] = [
   ["kind", "ใจดี", "💛", "feeling"],
   ["brave", "กล้าหาญ", "💪", "feeling"],
   ["fun", "สนุก", "🎉", "feeling"],
+  ["quiet", "เงียบ", "🤫", "feeling"],
   ["red", "สีแดง", "🔴", "color"],
   ["blue", "สีน้ำเงิน", "🔵", "color"],
   ["green", "สีเขียว", "🟢", "color"],
@@ -274,6 +289,26 @@ const rawWords: RawWord[] = [
   ["heart shape", "รูปหัวใจ", "❤️", "shape"],
   ["line", "เส้น", "➖", "shape"],
   ["dot", "จุด", "⚫", "shape"],
+  ["x-ray", "เอ็กซเรย์", "🩻", "health"],
+  ["box", "กล่อง", "📦", "home"],
+  ["vase", "แจกัน", "🏺", "home"],
+  ["quilt", "ผ้านวม", "🛏️", "home"],
+  ["umbrella", "ร่ม", "☂️", "home"],
+  ["igloo", "บ้านหิมะ", "🧊", "place"],
+  ["queen", "ราชินี", "👑", "people"],
+  ["uncle", "ลุง", "👨", "people"],
+  ["unicorn", "ยูนิคอร์น", "🦄", "animal"],
+  ["insect", "แมลง", "🐞", "animal"],
+  ["vegetable", "ผัก", "🥦", "food"],
+  ["volcano", "ภูเขาไฟ", "🌋", "nature"],
+  ["zero", "ศูนย์", "0️⃣", "number"],
+  ["zigzag", "ซิกแซก", "〰️", "shape"],
+  ["yes", "ใช่", "✅", "concept"],
+  ["quack", "เสียงเป็ด", "🦆", "sound"],
+  ["quick", "เร็ว", "💨", "concept"],
+  ["yawn", "หาว", "🥱", "action"],
+  ["mix", "ผสม", "🥣", "action"],
+  ["six", "หก", "6️⃣", "number"],
   ["big", "ใหญ่", "🔎", "concept"],
   ["small", "เล็ก", "🔍", "concept"],
   ["little", "เล็ก", "🔍", "concept"],
@@ -287,6 +322,8 @@ const rawWords: RawWord[] = [
   ["fast", "เร็ว", "💨", "concept"],
   ["slow", "ช้า", "🐢", "concept"],
   ["up", "ขึ้น", "⬆️", "concept"],
+  ["under", "ข้างใต้", "⬇️", "concept"],
+  ["upstairs", "ชั้นบน", "⬆️", "concept"],
   ["down", "ลง", "⬇️", "concept"],
   ["in", "ข้างใน", "📥", "concept"],
   ["out", "ข้างนอก", "📤", "concept"],
@@ -302,7 +339,85 @@ const rawWords: RawWord[] = [
   ["ten", "สิบ", "🔟", "number"]
 ];
 
+type PhraseGroup = {
+  action: string;
+  thaiAction: string;
+  emoji: string;
+  targets: RawWord[];
+  limit?: number;
+};
+
 const clean = (value: string) => value.toLowerCase().replace(/[^a-z]/g, "");
+
+function byCategory(...categories: string[]): RawWord[] {
+  const categorySet = new Set(categories);
+  return rawWords.filter(([, , , category]) => categorySet.has(category));
+}
+
+function byWord(...words: string[]): RawWord[] {
+  const wordSet = new Set(words.map(clean));
+  return rawWords.filter(([word]) => wordSet.has(clean(word)));
+}
+
+function makePhraseGroups(): PhraseGroup[] {
+  const portable = byWord(
+    "apple", "banana", "orange", "grape", "mango", "bread", "cookie", "milk", "water", "juice",
+    "cup", "bottle", "bowl", "plate", "spoon", "book", "paper", "pencil", "crayon", "eraser",
+    "bag", "lunchbox", "ball", "toy", "block", "doll", "teddy", "puzzle", "kite", "truck",
+    "car", "robot", "hat", "shoe", "sock", "shirt", "box", "umbrella", "key"
+  );
+
+  const washable = byWord(
+    "hand", "face", "hair", "foot", "shirt", "sock", "shoe", "cup", "bottle", "bowl",
+    "plate", "spoon", "table", "floor", "toy", "ball"
+  );
+
+  const openable = byWord("door", "window", "book", "bag", "box", "bottle", "lunchbox");
+  const wearable = byCategory("clothes");
+  const drawable = [...byCategory("animal", "nature", "shape", "vehicle"), ...byWord("house", "family", "friend")];
+  const countable = [...byCategory("food", "toy", "animal", "school"), ...byWord("finger", "toe")];
+
+  return [
+    { action: "want", thaiAction: "อยากได้", emoji: "🙋", targets: [...byCategory("food", "toy", "school", "clothes"), ...byWord("water", "milk", "juice", "blanket", "pillow")] },
+    { action: "like", thaiAction: "ชอบ", emoji: "💛", targets: [...byCategory("food", "toy", "animal", "nature", "color", "shape")] },
+    { action: "find", thaiAction: "หา", emoji: "🔎", targets: [...byCategory("home", "toy", "school", "clothes", "animal", "vehicle", "nature"), ...byWord("mom", "dad", "teacher", "friend")] },
+    { action: "see", thaiAction: "เห็น", emoji: "👀", targets: [...byCategory("people", "animal", "vehicle", "nature", "place", "color", "shape")] },
+    { action: "touch", thaiAction: "แตะ", emoji: "☝️", targets: [...byCategory("body", "clothes", "home", "toy", "school", "nature", "shape")] },
+    { action: "point to", thaiAction: "ชี้ไปที่", emoji: "👉", targets: [...byCategory("body", "home", "toy", "school", "animal", "nature", "shape")] },
+    { action: "bring", thaiAction: "เอามา", emoji: "🤲", targets: portable },
+    { action: "carry", thaiAction: "ถือ", emoji: "👐", targets: portable },
+    { action: "pick up", thaiAction: "หยิบขึ้น", emoji: "🤏", targets: portable },
+    { action: "put away", thaiAction: "เก็บเข้าที่", emoji: "📥", targets: [...byCategory("toy", "school", "clothes"), ...byWord("cup", "plate", "spoon", "bottle", "book", "bag", "box")] },
+    { action: "open", thaiAction: "เปิด", emoji: "🚪", targets: openable },
+    { action: "close", thaiAction: "ปิด", emoji: "🚪", targets: openable },
+    { action: "wash", thaiAction: "ล้าง", emoji: "🧼", targets: washable },
+    { action: "dry", thaiAction: "เช็ดให้แห้ง", emoji: "☀️", targets: byWord("hand", "face", "hair", "foot", "shirt", "sock", "shoe", "cup", "plate", "table") },
+    { action: "brush", thaiAction: "แปรง", emoji: "🪥", targets: byWord("tooth", "teeth", "hair") },
+    { action: "wear", thaiAction: "ใส่", emoji: "👕", targets: wearable },
+    { action: "take off", thaiAction: "ถอด", emoji: "👟", targets: wearable },
+    { action: "eat", thaiAction: "กิน", emoji: "🍽️", targets: byCategory("food") },
+    { action: "drink", thaiAction: "ดื่ม", emoji: "🥤", targets: byWord("water", "milk", "juice", "soup", "yogurt") },
+    { action: "share", thaiAction: "แบ่งปัน", emoji: "🤝", targets: [...byCategory("food", "toy", "school"), ...byWord("water", "milk", "juice")] },
+    { action: "play with", thaiAction: "เล่นกับ", emoji: "🧸", targets: [...byCategory("toy"), ...byWord("cat", "dog", "rabbit", "ball", "bike", "scooter")] },
+    { action: "feed", thaiAction: "ให้อาหาร", emoji: "🥣", targets: byWord("cat", "dog", "fish", "bird", "duck", "cow", "pig", "rabbit", "horse", "chicken", "goat", "sheep") },
+    { action: "pet", thaiAction: "ลูบเบา ๆ", emoji: "✋", targets: byWord("cat", "dog", "rabbit", "horse", "cow", "goat", "sheep") },
+    { action: "ride", thaiAction: "ขี่", emoji: "🚲", targets: byWord("bike", "scooter", "horse", "bus", "train", "car", "van") },
+    { action: "go to", thaiAction: "ไป", emoji: "➡️", targets: byCategory("place") },
+    { action: "look at", thaiAction: "มองดู", emoji: "👀", targets: [...byCategory("animal", "nature", "place", "vehicle", "shape"), ...byWord("book", "picture", "clock")] },
+    { action: "listen to", thaiAction: "ฟัง", emoji: "👂", targets: [...byWord("teacher", "mom", "dad", "friend", "music", "bell", "bird", "rain", "wind"), ...byCategory("animal")] },
+    { action: "draw", thaiAction: "วาด", emoji: "🖍️", targets: drawable },
+    { action: "color", thaiAction: "ระบายสี", emoji: "🎨", targets: drawable },
+    { action: "count", thaiAction: "นับ", emoji: "🔢", targets: countable },
+    { action: "build", thaiAction: "ต่อ", emoji: "🧱", targets: byWord("block", "house", "tower", "road", "car", "train", "robot") },
+    { action: "make", thaiAction: "ทำ", emoji: "👐", targets: byWord("cake", "bread", "sandwich", "soup", "picture", "card", "tower", "puzzle") },
+    { action: "cut", thaiAction: "ตัด", emoji: "✂️", targets: byWord("paper", "apple", "banana", "bread", "cake", "carrot") },
+    { action: "fold", thaiAction: "พับ", emoji: "📄", targets: byWord("paper", "shirt", "pants", "towel", "blanket") },
+    { action: "throw", thaiAction: "โยน", emoji: "🙌", targets: byWord("ball", "beanbag", "paper", "toy") },
+    { action: "catch", thaiAction: "รับ", emoji: "🤲", targets: byWord("ball", "beanbag", "toy") },
+    { action: "kick", thaiAction: "เตะ", emoji: "🦵", targets: byWord("ball") },
+    { action: "bounce", thaiAction: "เด้ง", emoji: "🏀", targets: byWord("ball") }
+  ];
+}
 
 function makeHints(word: string): string[] {
   const compact = clean(word);
@@ -317,11 +432,23 @@ function makeHints(word: string): string[] {
 }
 
 export function buildExpandedWords(): KidWord[] {
-  return rawWords.map(([word, thai, emoji, category]) => ({
+  const baseWords = rawWords.map(([word, thai, emoji, category]) => ({
     word,
     thai,
     emoji,
     hints: makeHints(word),
     imagePrompt: `simple child-friendly flashcard for ${word}, real-life ${category} vocabulary, soft bright toy style, transparent background`
   }));
+
+  const phraseWords = makePhraseGroups().flatMap(group =>
+    group.targets.slice(0, group.limit ?? group.targets.length).map(([target, thai, targetEmoji]) => ({
+      word: `${group.action} ${target}`,
+      thai: `${group.thaiAction} ${thai}`,
+      emoji: targetEmoji || group.emoji,
+      hints: makeHints(`${group.action} ${target}`),
+      imagePrompt: `simple child-friendly flashcard for ${group.action} ${target}, real-life daily phrase, soft bright toy style, transparent background`
+    }))
+  );
+
+  return [...baseWords, ...phraseWords];
 }

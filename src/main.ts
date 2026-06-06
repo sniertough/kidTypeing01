@@ -126,9 +126,9 @@ function showImage(item: KidWord) {
 }
 
 function showSplash(item: KidWord) {
-  splashEmoji.textContent = item.emoji;
+  splashEmoji.textContent = item.image ? item.emoji : "?";
   splashWord.textContent = item.word;
-  splashMeaning.textContent = item.image ? item.thai : `${item.thai} · ยังไม่มีรูป/เสียง AI`;
+  splashMeaning.textContent = item.thai;
   setRandomSplashTarget();
 
   wordSplash.classList.remove("play");
@@ -171,7 +171,7 @@ function renderHistory() {
     const button = document.createElement("button");
     button.className = "history-item";
     button.type = "button";
-    button.innerHTML = `<span aria-hidden="true">${item.emoji}</span><strong>${item.word}</strong>`;
+    button.innerHTML = `<span aria-hidden="true">${item.image ? item.emoji : "?"}</span><strong>${item.word}</strong>`;
     button.addEventListener("click", () => {
       setResult(item, 1);
       typingPad.focus();

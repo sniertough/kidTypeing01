@@ -45,3 +45,9 @@ public/assets/images/dog.webp
 ## Word Bank
 
 คำหลักที่มี asset เฉพาะอยู่ใน `src/words.ts` ส่วนคำศัพท์ชีวิตประจำวันอยู่ใน `src/expandedWords.ts`
+
+ตรวจจำนวนคำและ letter bucket ได้ด้วย:
+
+```bash
+npm run wordbank:report
+```
