@@ -1,0 +1,23 @@
+{
+  "name": "kid-typing-magic",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "generate:tts": "node scripts/generate-openai-tts.mjs"
+  },
+  "dependencies": {
+    "howler": "^2.2.4"
+  },
+  "devDependencies": {
+    "@types/howler": "^2.2.12",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5"
+  },
+  "optionalDependencies": {
+    "openai": "^4.104.0"
+  }
+}

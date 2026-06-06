@@ -1,0 +1,464 @@
+:root {
+  color-scheme: dark;
+  --bg: #101116;
+  --surface: rgba(24, 27, 35, .88);
+  --surface-strong: #222631;
+  --ink: #fbfcff;
+  --muted: #bac2d3;
+  --line: rgba(255, 255, 255, .13);
+  --green: #42d6a4;
+  --yellow: #ffd166;
+  --blue: #5aa9ff;
+  --red: #ff6b6b;
+  --violet: #d7a6ff;
+  --shadow: 0 26px 80px rgba(0, 0, 0, .42);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 13% 14%, rgba(66, 214, 164, .2), transparent 26rem),
+    radial-gradient(circle at 88% 18%, rgba(255, 209, 102, .18), transparent 24rem),
+    radial-gradient(circle at 70% 90%, rgba(90, 169, 255, .16), transparent 24rem),
+    linear-gradient(135deg, #101116 0%, #191b25 52%, #102228 100%);
+  color: var(--ink);
+  font-family: ui-rounded, "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+}
+
+button,
+select {
+  font: inherit;
+}
+
+button,
+select {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .08);
+  color: var(--ink);
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover,
+select:hover {
+  background: rgba(255, 255, 255, .13);
+}
+
+.play-surface {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 16px;
+  width: 100%;
+  height: 100vh;
+  padding: 16px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 62px;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 260px;
+}
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--green), var(--blue));
+  color: #061113;
+  font-weight: 950;
+}
+
+.brand strong,
+.brand span {
+  display: block;
+}
+
+.brand strong {
+  font-size: 18px;
+  line-height: 1.1;
+}
+
+.brand span {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  width: 100%;
+}
+
+.icon-button {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  font-weight: 950;
+}
+
+.icon-button.active {
+  border-color: rgba(66, 214, 164, .7);
+  background: rgba(66, 214, 164, .18);
+}
+
+.text-button,
+select {
+  min-height: 42px;
+  padding: 0 13px;
+}
+
+.main-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(310px, 390px);
+  gap: 16px;
+  min-height: 0;
+}
+
+.typing-panel,
+.result-panel {
+  min-height: 0;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(16, 17, 22, .68);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.typing-panel {
+  position: relative;
+}
+
+.typing-pad {
+  width: 100%;
+  height: 100%;
+  padding: clamp(20px, 4vw, 46px);
+  overflow: auto;
+  outline: none;
+  font-size: clamp(38px, 6vw, 92px);
+  line-height: 1.16;
+  letter-spacing: 0;
+  word-break: break-word;
+}
+
+.typing-pad:empty::before {
+  content: "กดแป้นพิมพ์ได้เลย";
+  color: rgba(255, 255, 255, .33);
+}
+
+.typed-letter,
+.space {
+  display: inline-block;
+  font-weight: 950;
+  animation: letter-pop .18s ease-out;
+}
+
+.typed-letter {
+  margin: 0 .025em;
+}
+
+.space {
+  width: .55em;
+}
+
+.spotlight {
+  position: fixed;
+  inset: 0;
+  z-index: 8;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(.84);
+  transition: opacity .12s ease, transform .12s ease;
+  font-size: min(34vw, 260px);
+  font-weight: 950;
+  text-shadow: 0 18px 55px rgba(0, 0, 0, .5);
+}
+
+.spotlight.show {
+  opacity: .72;
+  transform: scale(1);
+}
+
+.result-panel {
+  display: grid;
+  grid-template-rows: minmax(230px, 1fr) auto minmax(166px, .6fr);
+  background: var(--surface);
+}
+
+.image-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .09), transparent),
+    radial-gradient(circle at 50% 61%, rgba(255, 255, 255, .12), transparent 13rem);
+}
+
+.image-stage::after {
+  content: "";
+  position: absolute;
+  inset: auto 14% 10% 14%;
+  height: 24px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, .3);
+  filter: blur(10px);
+}
+
+#wordImage,
+.emoji-fallback {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: min(76%, 260px);
+  aspect-ratio: 1;
+  object-fit: contain;
+  user-select: none;
+}
+
+.emoji-fallback {
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, .15);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .08);
+  font-size: clamp(94px, 16vw, 178px);
+}
+
+.bounce {
+  animation: bounce .55s cubic-bezier(.2, .9, .35, 1.22);
+}
+
+.word-readout {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+  border-top: 1px solid var(--line);
+  background: rgba(11, 12, 15, .32);
+}
+
+.buffer-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.buffer-row strong {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ink);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.word-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+h1 {
+  min-width: 0;
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: clamp(34px, 5vw, 58px);
+  line-height: .95;
+  letter-spacing: 0;
+}
+
+#scoreBadge {
+  min-width: 58px;
+  color: var(--yellow);
+  font-size: 20px;
+  font-weight: 950;
+  text-align: right;
+}
+
+#thaiMeaning {
+  margin: 0;
+  color: var(--muted);
+  font-size: 18px;
+}
+
+.history-wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-top: 1px solid var(--line);
+}
+
+.history-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.history {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  min-height: 0;
+  padding: 0 10px 10px;
+  overflow: auto;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  min-height: 46px;
+  padding: 8px;
+  text-align: left;
+}
+
+.history-item span {
+  flex: 0 0 auto;
+  font-size: 27px;
+}
+
+.history-item strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.confetti {
+  position: fixed;
+  z-index: 20;
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+@keyframes letter-pop {
+  from {
+    transform: translateY(8px) scale(.78);
+    opacity: .2;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(8px) scale(.76) rotate(-4deg);
+    opacity: .35;
+  }
+  45% {
+    transform: translateY(-18px) scale(1.08) rotate(3deg);
+    opacity: 1;
+  }
+  72% {
+    transform: translateY(4px) scale(.97) rotate(-1deg);
+  }
+  100% {
+    transform: translateY(0) scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 900px) {
+  body {
+    overflow: auto;
+  }
+
+  .play-surface {
+    min-height: 100vh;
+    height: auto;
+    padding: 10px;
+  }
+
+  .topbar {
+    align-items: stretch;
+    flex-wrap: wrap;
+  }
+
+  .brand {
+    width: 100%;
+  }
+
+  .controls {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .main-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(45vh, 1fr) auto;
+  }
+
+  .result-panel {
+    grid-template-rows: minmax(230px, 42vh) auto auto;
+  }
+
+  .history {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .brand {
+    min-width: 0;
+  }
+
+  .brand span {
+    display: none;
+  }
+
+  .text-button,
+  select {
+    padding: 0 10px;
+  }
+
+  .history {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

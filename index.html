@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kid Typing Magic</title>
+</head>
+<body>
+  <main id="app">
+    <section class="play-surface" aria-label="Kid typing game">
+      <header class="topbar">
+        <div class="brand" aria-label="Kid Typing Magic">
+          <div class="brand-mark">Aa</div>
+          <div>
+            <strong>Kid Typing Magic</strong>
+            <span>พิมพ์มั่วก็กลายเป็นคำได้</span>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button id="voiceMode" class="icon-button active" type="button" title="สลับเสียง AI / เสียงเครื่อง">
+            <span aria-hidden="true">♪</span>
+          </button>
+          <button id="soundFx" class="icon-button active" type="button" title="เปิดปิดเสียงปุ่ม">
+            <span aria-hidden="true">●</span>
+          </button>
+          <select id="language" aria-label="ภาษาเสียง">
+            <option value="en" selected>EN</option>
+            <option value="th">TH</option>
+          </select>
+          <button id="sayAgain" class="text-button" type="button">อ่านอีกที</button>
+          <button id="clearPad" class="text-button" type="button">ล้าง</button>
+          <button id="fullscreen" class="text-button" type="button">เต็มจอ</button>
+        </div>
+      </header>
+
+      <section class="main-grid">
+        <div class="typing-panel">
+          <div id="typingPad" class="typing-pad" tabindex="0" spellcheck="false" aria-label="พื้นที่พิมพ์"></div>
+          <div id="spotlight" class="spotlight" aria-hidden="true"></div>
+        </div>
+
+        <aside class="result-panel" aria-live="polite">
+          <div class="image-stage">
+            <img id="wordImage" alt="" decoding="async" />
+            <div id="emojiFallback" class="emoji-fallback">✨</div>
+          </div>
+
+          <div class="word-readout">
+            <div class="buffer-row">
+              <span>ล่าสุด</span>
+              <strong id="liveBuffer">เริ่มพิมพ์ได้เลย</strong>
+            </div>
+            <div class="word-line">
+              <h1 id="guessedWord">ready</h1>
+              <span id="scoreBadge">0%</span>
+            </div>
+            <p id="thaiMeaning">หยุดพิมพ์ 0.5 วินาที แล้วระบบจะเดาคำศัพท์ง่าย ๆ</p>
+          </div>
+
+          <div class="history-wrap">
+            <div class="history-title">
+              <span>คำที่เจอล่าสุด</span>
+              <span id="historyCount">0</span>
+            </div>
+            <div id="history" class="history"></div>
+          </div>
+        </aside>
+      </section>
+    </section>
+  </main>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
