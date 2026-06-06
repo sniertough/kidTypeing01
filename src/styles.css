@@ -422,6 +422,9 @@ h1 {
   place-items: center;
   pointer-events: none;
   opacity: 0;
+  --splash-x: 38vw;
+  --splash-y: -38vh;
+  --splash-rotate: 12deg;
 }
 
 .word-splash.play {
@@ -495,7 +498,7 @@ h1 {
   }
   100% {
     opacity: 0;
-    transform: translate(min(36vw, 380px), max(-36vh, -330px)) scale(.18) rotate(8deg);
+    transform: translate(var(--splash-x), var(--splash-y)) scale(.18) rotate(var(--splash-rotate));
   }
 }
 

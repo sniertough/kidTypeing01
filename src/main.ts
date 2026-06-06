@@ -33,6 +33,7 @@ let useAssetVoice = true;
 let useSoundFx = true;
 let spotTimer = 0;
 let splashTimer = 0;
+let lastSplashTarget = -1;
 
 const missingImage = "/assets/images/missing-word.svg";
 
@@ -126,6 +127,7 @@ function showSplash(item: KidWord) {
   splashEmoji.textContent = item.emoji;
   splashWord.textContent = item.word;
   splashMeaning.textContent = item.image ? item.thai : `${item.thai} · ยังไม่มีรูป/เสียง AI`;
+  setRandomSplashTarget();
 
   wordSplash.classList.remove("play");
   void wordSplash.offsetWidth;
@@ -133,6 +135,30 @@ function showSplash(item: KidWord) {
 
   window.clearTimeout(splashTimer);
   splashTimer = window.setTimeout(() => wordSplash.classList.remove("play"), 1200);
+}
+
+function setRandomSplashTarget() {
+  const targets = [
+    { x: "-38vw", y: "-38vh", rotate: "-12deg" },
+    { x: "0vw", y: "-44vh", rotate: "7deg" },
+    { x: "38vw", y: "-38vh", rotate: "12deg" },
+    { x: "44vw", y: "0vh", rotate: "10deg" },
+    { x: "36vw", y: "38vh", rotate: "-10deg" },
+    { x: "0vw", y: "44vh", rotate: "-7deg" },
+    { x: "-36vw", y: "38vh", rotate: "10deg" },
+    { x: "-44vw", y: "0vh", rotate: "-10deg" }
+  ];
+
+  let next = Math.floor(Math.random() * targets.length);
+  if (targets.length > 1 && next === lastSplashTarget) {
+    next = (next + 1 + Math.floor(Math.random() * (targets.length - 1))) % targets.length;
+  }
+  lastSplashTarget = next;
+
+  const target = targets[next];
+  wordSplash.style.setProperty("--splash-x", target.x);
+  wordSplash.style.setProperty("--splash-y", target.y);
+  wordSplash.style.setProperty("--splash-rotate", target.rotate);
 }
 
 function renderHistory() {
