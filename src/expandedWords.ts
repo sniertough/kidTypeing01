@@ -356,6 +356,8 @@ export function buildExpandedWords(): KidWord[] {
     word,
     thai,
     emoji,
+    tier: "kid",
+    priority: 0.08,
     hints: makeHints(word),
     imagePrompt: `simple child-friendly flashcard for ${word}, real-life ${category} vocabulary, soft bright toy style, transparent background`
   }));

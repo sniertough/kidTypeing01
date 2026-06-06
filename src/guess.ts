@@ -100,7 +100,8 @@ function scoreWord(rawInput: string, item: KidWord): number {
     const containsScore = target.includes(input) || input.includes(target) ? 0.2 : 0;
     const keyScore = keyboardBonus(input, target);
     const lengthPenalty = Math.min(Math.abs(input.length - target.length) * 0.035, 0.18);
-    const score = distanceScore * 0.58 + overlapScore * 0.22 + keyScore * 0.22 + prefixScore + containsScore - lengthPenalty;
+    const priority = item.priority ?? 0;
+    const score = distanceScore * 0.58 + overlapScore * 0.22 + keyScore * 0.22 + prefixScore + containsScore + priority - lengthPenalty;
     best = Math.max(best, score);
   }
 

@@ -1,12 +1,16 @@
 import { buildExpandedWords } from "./expandedWords";
+import { buildSupplementalWords } from "./supplementalWords";
 
 export type LanguageCode = "en" | "th";
+export type WordTier = "core" | "kid" | "general";
 
 export type KidWord = {
   word: string;
   thai: string;
   emoji: string;
   hints: string[];
+  tier?: WordTier;
+  priority?: number;
   image?: string;
   audio?: Partial<Record<LanguageCode, string>>;
   imagePrompt: string;
@@ -155,7 +159,13 @@ export const CORE_WORDS: KidWord[] = [
 const byCleanWord = new Map<string, KidWord>();
 const cleanWord = (value: string) => value.toLowerCase().replace(/[^a-z]/g, "");
 
-for (const item of [...CORE_WORDS, ...buildExpandedWords()]) {
+const coreWordsWithPriority: KidWord[] = CORE_WORDS.map(item => ({
+  ...item,
+  tier: "core",
+  priority: 0.16
+}));
+
+for (const item of [...coreWordsWithPriority, ...buildExpandedWords(), ...buildSupplementalWords()]) {
   const key = cleanWord(item.word);
   if (!byCleanWord.has(key)) byCleanWord.set(key, item);
 }
