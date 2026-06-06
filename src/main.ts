@@ -1,6 +1,7 @@
 import "./styles.css";
 import { AudioEngine } from "./audio";
 import { cleanInput, rankGuesses, type GuessResult } from "./guess";
+import { buildLetterBucket, isSingleLetterMode } from "./letterBuckets";
 import { WORDS, type KidWord, type LanguageCode } from "./words";
 
 const typingPad = document.querySelector<HTMLDivElement>("#typingPad")!;
@@ -34,6 +35,7 @@ let useSoundFx = true;
 let spotTimer = 0;
 let splashTimer = 0;
 let lastSplashTarget = -1;
+const letterBucketPositions: Record<string, number> = {};
 
 const missingImage = "/assets/images/missing-word.svg";
 
@@ -206,6 +208,17 @@ function isLowInformationInput(value: string) {
 }
 
 function chooseVariedGuess(value: string): GuessResult {
+  if (isSingleLetterMode(value)) {
+    const letter = cleanInput(value)[0];
+    const bucket = buildLetterBucket(letter, WORDS);
+    if (bucket.length > 0) {
+      const position = letterBucketPositions[letter] ?? 0;
+      const item = bucket[position % bucket.length];
+      letterBucketPositions[letter] = position + 1;
+      return { item, score: 1 };
+    }
+  }
+
   const ranked = rankGuesses(value, WORDS);
   const best = ranked[0];
   const recentWords = new Set(historyItems.slice(0, 5).map(item => item.word));
