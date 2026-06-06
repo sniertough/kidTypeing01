@@ -107,10 +107,14 @@ function scoreWord(rawInput: string, item: KidWord): number {
   return Math.max(0, Math.min(1, best));
 }
 
-export function guessWord(rawInput: string, words: KidWord[]): GuessResult {
-  const ranked = words
+export function rankGuesses(rawInput: string, words: KidWord[]): GuessResult[] {
+  return words
     .map(item => ({ item, score: scoreWord(rawInput, item) }))
     .sort((a, b) => b.score - a.score);
+}
+
+export function guessWord(rawInput: string, words: KidWord[]): GuessResult {
+  const ranked = rankGuesses(rawInput, words);
 
   return ranked[0];
 }

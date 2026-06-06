@@ -1,6 +1,6 @@
 import "./styles.css";
 import { AudioEngine } from "./audio";
-import { cleanInput, guessWord } from "./guess";
+import { cleanInput, rankGuesses, type GuessResult } from "./guess";
 import { WORDS, type KidWord, type LanguageCode } from "./words";
 
 const typingPad = document.querySelector<HTMLDivElement>("#typingPad")!;
@@ -166,13 +166,41 @@ function setResult(item: KidWord, score: number) {
   audio.playWord(item);
 }
 
+function isLowInformationInput(value: string) {
+  const clean = cleanInput(value);
+  if (clean.length <= 2) return true;
+
+  const letters = [...new Set(clean)];
+  const mostRepeated = letters.reduce((max, ch) => {
+    const count = clean.split(ch).length - 1;
+    return Math.max(max, count);
+  }, 0);
+
+  return letters.length <= 2 || mostRepeated / clean.length >= 0.7;
+}
+
+function chooseVariedGuess(value: string): GuessResult {
+  const ranked = rankGuesses(value, WORDS);
+  const best = ranked[0];
+  const recentWords = new Set(historyItems.slice(0, 5).map(item => item.word));
+
+  if (!isLowInformationInput(value) && (best.score >= 0.86 || best.item.word !== lastResult.word)) {
+    return best;
+  }
+
+  const scoreFloor = isLowInformationInput(value) ? Math.max(0.18, best.score * 0.55) : best.score * 0.8;
+  const varied = ranked.find(result => result.score >= scoreFloor && !recentWords.has(result.item.word));
+
+  return varied ?? best;
+}
+
 function scheduleGuess() {
   window.clearTimeout(idleTimer);
   idleTimer = window.setTimeout(() => {
     const clean = cleanInput(buffer);
     if (!clean) return;
 
-    const result = guessWord(clean, WORDS);
+    const result = chooseVariedGuess(clean);
     setResult(result.item, result.score);
     buffer = "";
     liveBuffer.textContent = "รอคำต่อไป";
