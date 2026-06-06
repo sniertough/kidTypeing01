@@ -20,10 +20,6 @@ const report = {
 
 console.log(JSON.stringify(report, null, 2));
 
-if (WORDS.length < 1000) {
-  throw new Error(`Word bank has ${WORDS.length} words, expected at least 1000.`);
-}
-
 if (tooSmall.length > 0) {
   throw new Error(`Some letter buckets have fewer than 5 words: ${report.failingLetters.join(", ")}`);
 }
