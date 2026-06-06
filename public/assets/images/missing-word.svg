@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-labelledby="title desc">
+  <title id="title">Missing word asset</title>
+  <desc id="desc">A playful placeholder for words that do not have generated image assets yet.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff36d"/>
+      <stop offset=".45" stop-color="#72e3ff"/>
+      <stop offset="1" stop-color="#ff91c8"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="24" stdDeviation="24" flood-color="#52366f" flood-opacity=".25"/>
+    </filter>
+  </defs>
+  <rect width="800" height="800" rx="72" fill="url(#bg)"/>
+  <path d="M110 190c78-54 166-78 264-72 132 8 238 60 318 156 48 58 68 125 60 202-12 114-88 197-228 249-96 36-198 40-306 12-82-21-137-65-166-132-29-68-22-145 21-231 12-24 24-45 37-64 14-21 14-58 0-120Z" fill="#fff" opacity=".86"/>
+  <g filter="url(#shadow)">
+    <circle cx="400" cy="324" r="138" fill="#fff"/>
+    <circle cx="350" cy="296" r="22" fill="#29304a"/>
+    <circle cx="450" cy="296" r="22" fill="#29304a"/>
+    <path d="M340 376c34 34 86 34 120 0" fill="none" stroke="#29304a" stroke-width="22" stroke-linecap="round"/>
+    <path d="M261 525h278c35 0 64 29 64 64v13H197v-13c0-35 29-64 64-64Z" fill="#5d5fef"/>
+    <path d="M293 525c11-55 54-95 107-95s96 40 107 95" fill="#ffd166"/>
+  </g>
+  <g fill="#29304a" font-family="Arial, sans-serif" text-anchor="middle">
+    <text x="400" y="666" font-size="54" font-weight="800">Image soon</text>
+    <text x="400" y="718" font-size="32" font-weight="700" opacity=".72">add asset later</text>
+  </g>
+</svg>

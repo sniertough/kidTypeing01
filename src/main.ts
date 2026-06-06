@@ -13,6 +13,11 @@ const thaiMeaning = document.querySelector<HTMLParagraphElement>("#thaiMeaning")
 const liveBuffer = document.querySelector<HTMLElement>("#liveBuffer")!;
 const history = document.querySelector<HTMLDivElement>("#history")!;
 const historyCount = document.querySelector<HTMLSpanElement>("#historyCount")!;
+const wordTotal = document.querySelector<HTMLSpanElement>("#wordTotal")!;
+const wordSplash = document.querySelector<HTMLDivElement>("#wordSplash")!;
+const splashEmoji = document.querySelector<HTMLDivElement>("#splashEmoji")!;
+const splashWord = document.querySelector<HTMLDivElement>("#splashWord")!;
+const splashMeaning = document.querySelector<HTMLDivElement>("#splashMeaning")!;
 const voiceModeButton = document.querySelector<HTMLButtonElement>("#voiceMode")!;
 const soundFxButton = document.querySelector<HTMLButtonElement>("#soundFx")!;
 const languageSelect = document.querySelector<HTMLSelectElement>("#language")!;
@@ -27,6 +32,9 @@ let historyItems: KidWord[] = [];
 let useAssetVoice = true;
 let useSoundFx = true;
 let spotTimer = 0;
+let splashTimer = 0;
+
+const missingImage = "/assets/images/missing-word.svg";
 
 const audio = new AudioEngine(
   () => languageSelect.value as LanguageCode,
@@ -94,10 +102,11 @@ function showImage(item: KidWord) {
   void emojiFallback.offsetWidth;
 
   if (!item.image) {
-    wordImage.removeAttribute("src");
-    wordImage.hidden = true;
-    emojiFallback.hidden = false;
-    emojiFallback.classList.add("bounce");
+    wordImage.hidden = false;
+    emojiFallback.hidden = true;
+    wordImage.src = missingImage;
+    wordImage.alt = "ยังไม่มีรูปสำหรับคำนี้";
+    wordImage.classList.add("bounce");
     return;
   }
 
@@ -107,10 +116,23 @@ function showImage(item: KidWord) {
   wordImage.alt = item.thai;
   wordImage.onload = () => wordImage.classList.add("bounce");
   wordImage.onerror = () => {
-    wordImage.hidden = true;
-    emojiFallback.hidden = false;
-    emojiFallback.classList.add("bounce");
+    wordImage.src = missingImage;
+    wordImage.alt = "ยังไม่มีรูปสำหรับคำนี้";
+    wordImage.classList.add("bounce");
   };
+}
+
+function showSplash(item: KidWord) {
+  splashEmoji.textContent = item.emoji;
+  splashWord.textContent = item.word;
+  splashMeaning.textContent = item.image ? item.thai : `${item.thai} · ยังไม่มีรูป/เสียง AI`;
+
+  wordSplash.classList.remove("play");
+  void wordSplash.offsetWidth;
+  wordSplash.classList.add("play");
+
+  window.clearTimeout(splashTimer);
+  splashTimer = window.setTimeout(() => wordSplash.classList.remove("play"), 1200);
 }
 
 function renderHistory() {
@@ -136,6 +158,7 @@ function setResult(item: KidWord, score: number) {
   thaiMeaning.textContent = item.thai;
   scoreBadge.textContent = `${Math.round(score * 100)}%`;
   showImage(item);
+  showSplash(item);
 
   historyItems = [item, ...historyItems.filter(entry => entry.word !== item.word)].slice(0, 10);
   renderHistory();
@@ -240,5 +263,6 @@ if ("speechSynthesis" in window) {
   window.speechSynthesis.onvoiceschanged = () => undefined;
 }
 
+wordTotal.textContent = WORDS.length.toLocaleString();
 showImage(lastResult);
 typingPad.focus();

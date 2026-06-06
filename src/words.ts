@@ -1,3 +1,5 @@
+import { buildExpandedWords } from "./expandedWords";
+
 export type LanguageCode = "en" | "th";
 
 export type KidWord = {
@@ -12,7 +14,7 @@ export type KidWord = {
 
 const asset = (folder: "audio" | "images", file: string) => `/assets/${folder}/${file}`;
 
-export const WORDS: KidWord[] = [
+export const CORE_WORDS: KidWord[] = [
   {
     word: "cat",
     thai: "แมว",
@@ -149,3 +151,12 @@ export const WORDS: KidWord[] = [
     imagePrompt: "sleepy child-friendly bedtime symbol, soft 3d icon, transparent background"
   }
 ];
+
+const byCleanWord = new Map<string, KidWord>();
+const cleanWord = (value: string) => value.toLowerCase().replace(/[^a-z]/g, "");
+
+for (const item of [...CORE_WORDS, ...buildExpandedWords()]) {
+  byCleanWord.set(cleanWord(item.word), item);
+}
+
+export const WORDS: KidWord[] = [...byCleanWord.values()];

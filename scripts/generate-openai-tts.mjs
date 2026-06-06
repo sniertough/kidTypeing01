@@ -40,13 +40,13 @@ async function writeSpeech(text, outputPath, instructions) {
 for (const [english, thai] of words) {
   await writeSpeech(
     english,
-    resolve(`assets/audio/en/${english}.mp3`),
+    resolve(`public/assets/audio/en/${english}.mp3`),
     "Speak like a warm preschool teacher. Very short, bright, clear pronunciation."
   );
 
   await writeSpeech(
     thai,
-    resolve(`assets/audio/th/${english}.mp3`),
+    resolve(`public/assets/audio/th/${english}.mp3`),
     "พูดเหมือนครูอนุบาลใจดี เสียงนุ่ม สดใส ชัด และสั้นมาก"
   );
 }

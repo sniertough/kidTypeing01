@@ -10,7 +10,7 @@
     <section class="play-surface" aria-label="Kid typing game">
       <header class="topbar">
         <div class="brand" aria-label="Kid Typing Magic">
-          <div class="brand-mark">Aa</div>
+          <div class="brand-mark">ABC</div>
           <div>
             <strong>Kid Typing Magic</strong>
             <span>พิมพ์มั่วก็กลายเป็นคำได้</span>
@@ -18,6 +18,10 @@
         </div>
 
         <div class="controls">
+          <div class="word-total">
+            <span>word bank</span>
+            <strong id="wordTotal">0</strong>
+          </div>
           <button id="voiceMode" class="icon-button active" type="button" title="สลับเสียง AI / เสียงเครื่อง">
             <span aria-hidden="true">♪</span>
           </button>
@@ -36,6 +40,9 @@
 
       <section class="main-grid">
         <div class="typing-panel">
+          <div class="typing-ribbon">
+            <span id="liveBuffer">เริ่มพิมพ์ได้เลย</span>
+          </div>
           <div id="typingPad" class="typing-pad" tabindex="0" spellcheck="false" aria-label="พื้นที่พิมพ์"></div>
           <div id="spotlight" class="spotlight" aria-hidden="true"></div>
         </div>
@@ -47,10 +54,6 @@
           </div>
 
           <div class="word-readout">
-            <div class="buffer-row">
-              <span>ล่าสุด</span>
-              <strong id="liveBuffer">เริ่มพิมพ์ได้เลย</strong>
-            </div>
             <div class="word-line">
               <h1 id="guessedWord">ready</h1>
               <span id="scoreBadge">0%</span>
@@ -69,6 +72,14 @@
       </section>
     </section>
   </main>
+
+  <div id="wordSplash" class="word-splash" aria-hidden="true">
+    <div class="splash-card">
+      <div id="splashEmoji" class="splash-emoji">✨</div>
+      <div id="splashWord" class="splash-word">ready</div>
+      <div id="splashMeaning" class="splash-meaning">พร้อมเล่น</div>
+    </div>
+  </div>
 
   <script type="module" src="/src/main.ts"></script>
 </body>

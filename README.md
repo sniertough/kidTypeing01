@@ -11,15 +11,15 @@ npm run dev
 
 ## แนวทางเสียง
 
-แอปจะพยายามเล่นไฟล์เสียงจาก `assets/audio` ก่อน ถ้าไม่มีไฟล์จะ fallback ไปใช้เสียงจาก browser
+แอปจะพยายามเล่นไฟล์เสียงจาก `public/assets/audio` ก่อน ถ้าไม่มีไฟล์จะ fallback ไปใช้เสียงจาก browser
 
 โครงไฟล์ที่แนะนำ:
 
 ```text
-assets/audio/en/cat.mp3
-assets/audio/th/cat.mp3
-assets/audio/en/dog.mp3
-assets/audio/th/dog.mp3
+public/assets/audio/en/cat.mp3
+public/assets/audio/th/cat.mp3
+public/assets/audio/en/dog.mp3
+public/assets/audio/th/dog.mp3
 ```
 
 ถ้าจะ generate ด้วย OpenAI TTS:
@@ -33,15 +33,15 @@ npm run generate:tts
 
 ## แนวทางรูป
 
-ใส่รูปเป็น `.webp` ใน `assets/images` แล้ว mapping ใน `src/words.ts`
+ใส่รูปเป็น `.webp` ใน `public/assets/images` แล้ว mapping ใน `src/words.ts`
 
 ```text
-assets/images/cat.webp
-assets/images/dog.webp
+public/assets/images/cat.webp
+public/assets/images/dog.webp
 ```
 
-ถ้าไฟล์รูปยังไม่มี แอปจะแสดง emoji fallback ไปก่อน
+ถ้าไฟล์รูปยังไม่มี แอปจะแสดงรูป fallback ที่ `public/assets/images/missing-word.svg` ไปก่อน
 
 ## Word Bank
 
-เพิ่มคำศัพท์ได้ที่ `src/words.ts` โดยใส่ `word`, `thai`, `emoji`, `hints`, `image`, และ `audio`
+คำหลักที่มี asset เฉพาะอยู่ใน `src/words.ts` ส่วนคำศัพท์ชีวิตประจำวันอยู่ใน `src/expandedWords.ts`
